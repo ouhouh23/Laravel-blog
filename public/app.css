@@ -1,0 +1,18 @@
+h1, h2 {
+	text-align: center;
+}
+
+article {
+	max-width: 50%;
+	margin: 0 auto;
+	border-bottom: 0.0625rem solid gray;
+}
+
+article + article {
+	margin-bottom: 3rem;
+}
+
+p {
+	font-size: 1.25rem;
+	line-height: 1.6;
+}
