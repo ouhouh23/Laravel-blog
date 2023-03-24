@@ -2,24 +2,44 @@
 
 namespace App\Models;
 
-use Illuminate\Support\Facades\File; 
+use Illuminate\Support\Facades\File;
+use Spatie\YamlFrontMatter\YamlFrontMatter;
 
 class Post {
-	public static function find ($slug) {
-		if (! file_exists($path = resource_path("/posts/{$slug}.html"))) {
-			abort(404);
-		}
-
-		return cache()->remember("posts.{$slug}", 5, function () use($path) {
-			return file_get_contents($path);
-		});
-	}
+    public $title;
+    public $data;
+    public $piece;
+    public $body;
+    public $slug;
+    public function __construct($title, $date, $piece, $body, $slug)
+    {
+        $this->title = $title;
+        $this->date = $date;
+        $this->piece = $piece;
+        $this->body = $body;
+        $this->slug = $slug;
+    }
 
 	public static function findAll () {
-		$files = File::files(resource_path("/posts"));
-
-		return array_map(function ($file) {
-			return $file->getContents();
-		}, $files);
+        return cache()->rememberForever('posts.all', function () {
+            return collect(File::files(resource_path("/posts")))
+                ->map(function ($file) {
+                    $document = YamlFrontMatter::parseFile($file);
+                    return new Post($document->title, $document->date, $document->piece, $document->body(), $document->slug);
+                })->sortByDesc('date');
+        });
 	}
+
+    public static function find ($slug) {
+        return static::findAll()->firstWhere('slug', $slug);
+    }
+    public static function findOrFail ($slug) {
+        $post = static::find($slug);
+
+        if (! $post) {
+            abort(404);
+        }
+
+        return $post;
+    }
 }

@@ -20,26 +20,8 @@ Route::get('/', function () {
     ]);
 });
 
-// Route::get('posts/{post}', function ($slug) {
-//     return view('post', [
-//         'post' => Post::find($slug)
-//     ]);
-// })->where('post', '[A-z_/-]+');
-
-
-
-Route::get('posts/{post}', function ($slug) {
-    $path = __DIR__ . "/../resources/posts/{$slug}.html";
-
-    if (! file_exists($path)) {
-        abort(404);
-    }
-
-    $post = cache()->remember("posts.{$slug}", 5, fn() => 
-        file_get_contents($path)
-    );
-
-    return view('post', [
-        'post' => file_get_contents($path)
-    ]);
-})->where('post', '[A-z_/-]+');
+ Route::get('posts/{post}', function ($slug) {
+     return view('post', [
+         'post' => Post::findOrFail($slug)
+     ]);
+ });

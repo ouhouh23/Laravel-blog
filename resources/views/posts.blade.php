@@ -1,20 +1,16 @@
-<!DOCTYPE html>
-<html lang="EN-US">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layout')
 
-        <link rel="stylesheet" type="text/css" href="/app.css">
+@section('content')
+    <h1>This is my awesome blog</h1>
 
-        <title>Blog</title>
-    </head>
-    <body>
-        <h1>This is my awesome blog</h1>
-
-        <?php foreach ($posts as $post) : ?>
-            <article>
-                <?= $post; ?>
-            </article>
-        <?php endforeach; ?>
-    </body>
-</html>
+    @foreach ($posts as $post)
+        <article>
+            <h2>
+                <a href="/posts/{{ $post->slug }}">
+                    {{ $post->title }}
+                </a>
+            </h2>
+            {{ $post->piece }}
+        </article>
+    @endforeach
+@endsection

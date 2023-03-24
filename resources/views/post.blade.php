@@ -1,22 +1,17 @@
-<!DOCTYPE html>
-<html lang="EN-US">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layout')
 
-        <link rel="stylesheet" type="text/css" href="/app.css">
+@section('content')
+    <h1>Single post description</h1>
 
-        <title>Blog</title>
-    </head>
-    <body>
-        <h1>Single post description</h1>
+    <article>
+        <h2>
+            {{ $post->title }}
+        </h2>
 
-        <article>
-            <?= $post; ?>
+        {!! $post->body !!}
 
-            <a href="/">
-                Go back
-            </a>
-        </article>
-    </body>
-</html>
+        <a href="/">
+            Go back
+        </a>
+    </article>
+@endsection
