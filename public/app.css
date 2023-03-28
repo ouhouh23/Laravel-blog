@@ -2,10 +2,16 @@ h1, h2 {
 	text-align: center;
 }
 
+a {
+    display: block;
+    margin: 1rem 0;
+}
+
 article {
 	max-width: 50%;
 	margin: 0 auto;
 	border-bottom: 0.0625rem solid gray;
+    font-size: 1.2rem;
 }
 
 article + article {

@@ -16,12 +16,18 @@ use App\Models\Post;
 
 Route::get('/', function () {
     return view('posts', [
-        'posts' => Post::findAll()
+        'posts' => Post::all()
     ]);
 });
 
- Route::get('posts/{post}', function ($slug) {
-     return view('post', [
-         'post' => Post::findOrFail($slug)
-     ]);
- });
+Route::get('posts/{post}', function (Post $post) {
+    return view('post', [
+        'post' => $post
+    ]);
+});
+
+// Route::get('posts/{post}', function ($id) {
+//     return view('post', [
+//         'post' => Post::findOrFail($id)
+//     ]);
+// });
