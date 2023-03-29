@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\PostsController;
+use App\Models\Category;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
-use App\Models\Post;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,20 +16,20 @@ use App\Models\Post;
 |
 */
 
-Route::get('/', function () {
+Route::get('/', [PostsController::class, 'index']);
+
+Route::get('posts/{post}', [PostsController::class, 'show']);
+
+Route::get('categories/{category:slug}', function (Category $category) {
     return view('posts', [
-        'posts' => Post::all()
+        'posts' => $category->posts,
+        'categories' => Category::all(),
+        'currentCategory' => $category,
     ]);
 });
 
-Route::get('posts/{post}', function (Post $post) {
-    return view('post', [
-        'post' => $post
+Route::get('authors/{author:username}', function (User $author) {
+    return view('posts', [
+        'posts' => $author->posts,
     ]);
 });
-
-// Route::get('posts/{post}', function ($id) {
-//     return view('post', [
-//         'post' => Post::findOrFail($id)
-//     ]);
-// });

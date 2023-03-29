@@ -1,23 +1,9 @@
-@extends('layout')
+<x-layout>
+    @include('_posts-header')
 
-@section('content')
-    <h1>This is my awesome blog</h1>
-
-    @foreach ($posts as $post)
-        <article>
-            <h2>
-                <a href="/posts/{{ $post->id }}">
-                    {{ $post->title }}
-                </a>
-            </h2>
-
-            <a href="#">
-                {{ $post->category->name }}
-            </a>
-
-            <div>
-                {{ $post->piece }}
-            </div>
-        </article>
-    @endforeach
-@endsection
+    <main class="max-w-6xl mx-auto mt-6 lg:mt-20 space-y-6">
+        @if($posts->count())
+            <x-post-grid :posts="$posts" />
+        @endif
+    </main>
+</x-layout>
