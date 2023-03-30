@@ -25,12 +25,19 @@ class Post extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function scopeFilter($query)
+    public function scopeFilter($query, array $filters)
     {
-        if (request('search')) {
-            $query
-                ->where('title', 'like', '%'.request('search').'%')
-                ->orWhere('title', 'like', '%'.request('search').'%');
-        }
+//        if ($filters['search'] ?? false ) {
+//            $query
+//                ->where('title', 'like', '%'.$filters['search'].'%')
+//                ->orWhere('title', 'like', '%'.$filters['search'].'%');
+//        }
+        $query->when($filters['search'] ?? false, fn($query, $search) =>
+            $query->where('title', 'like', '%'. $search. '%')
+            ->orWhere('title', 'like', '%' . $search . '%'));
+
+        $query->when($filters['category'] ?? false, fn($query, $category) =>
+            $query->whereHas('category', fn($query) =>
+                $query->where('slug', $category)));
     }
 }

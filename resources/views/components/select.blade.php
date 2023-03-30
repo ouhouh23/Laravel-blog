@@ -9,7 +9,7 @@
         @if($categories->count())
             @foreach($categories as $category)
                 <option
-                    value="/categories/{{ $category->slug }}"
+                    value="/?category={{ $category->slug }}"
                     {{ !empty($currentCategory) && $currentCategory->name === $category->name ? 'selected' : '' }}
                 >
                     {{ $category->name }}
