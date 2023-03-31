@@ -1,15 +1,13 @@
-@props(['categories', 'currentCategory'])
-
 <div class="relative flex lg:inline-flex items-center bg-gray-100 rounded-xl">
     <select class="flex-1 appearance-none bg-transparent py-2 pl-3 pr-9 text-sm font-semibold" data-select>
-        <option value="/" {{ empty($currentCategory) ? 'selected' : '' }}>
+        <option value="/?{{ http_build_query(request()->except('category', 'page'))}}" {{ empty($currentCategory) ? 'selected' : '' }}>
             All
         </option>
 
         @if($categories->count())
             @foreach($categories as $category)
                 <option
-                    value="/?category={{ $category->slug }}"
+                    value="/?category={{ $category->slug }}&{{ http_build_query(request()->except('category', 'page')) }}"
                     {{ !empty($currentCategory) && $currentCategory->name === $category->name ? 'selected' : '' }}
                 >
                     {{ $category->name }}

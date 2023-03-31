@@ -5,7 +5,7 @@
 
     <div class="space-y-2 lg:space-y-0 lg:space-x-4 mt-8">
         <!--  Category -->
-        <x-select :categories="$categories" :currentCategory="$currentCategory" />
+        <x-category-select />
 
         <!-- Other Filters -->
         <div class="relative flex lg:inline-flex items-center bg-gray-100 rounded-xl">
@@ -31,7 +31,11 @@
 
         <!-- Search -->
         <div class="relative flex lg:inline-flex items-center bg-gray-100 rounded-xl px-3 py-2">
-            <form method="GET" action="#">
+            <form method="GET" action="/">
+                @if(request('category'))
+                    <input type="hidden" name="category" value="{{ request('category') }}" />
+                @endif
+
                 <input
                     type="text"
                     name="search"

@@ -19,7 +19,7 @@ class PostFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => $this->faker->sentence,
+            'title' => $this->faker->sentence(),
             'piece' => '<p>'.implode('</p><p>', $this->faker->paragraphs(2)).'</p>',
             'body' => '<p>'.implode('</p><p>', $this->faker->paragraphs(6)).'</p>',
             'user_id' => User::factory(),

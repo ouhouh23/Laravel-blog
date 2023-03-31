@@ -12,7 +12,9 @@
                     <div class="flex items-center lg:justify-center text-sm mt-4">
                         <img src="/images/lary-avatar.svg" alt="Lary avatar">
                         <div class="ml-3 text-left">
-                            <h5 class="font-bold">{{ $post->author->name }}</h5>
+                            <a href="/?author={{ $post->author->username }}">
+                                <h5 class="font-bold">{{ $post->author->name }}</h5>
+                            </a>
                             <h6>Mascot at Laracasts</h6>
                         </div>
                     </div>
@@ -48,6 +50,14 @@
                         {!! $post->body !!}
                     </div>
                 </div>
+
+                <section class="col-span-8 col-start-5 mt-10 space-y-6">
+                    @include('posts._comments-form')
+
+                    @foreach($post->comments as $comment)
+                        <x-post-comment :comment="$comment" />
+                    @endforeach
+                </section>
             </article>
         </main>
     </section>
