@@ -1,17 +1,24 @@
 <?php
 
+use App\Http\Controllers\AdminPostsController;
 use App\Http\Controllers\NewsletterContoller;
 use App\Http\Controllers\PostCommentsController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionController;
-use App\Services\Newsletter;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Validation\ValidationException;
 
 Route::get('/', [PostsController::class, 'index']);
-
 Route::get('posts/{post}', [PostsController::class, 'show']);
+Route::get('admin/posts/create', [AdminPostsController::class, 'create'])->middleware('can:admin');
+Route::post('admin/posts', [AdminPostsController::class, 'store'])->middleware('can:admin');
+Route::get('admin/posts', [AdminPostsController::class, 'index'])->middleware('can:admin');
+Route::get('admin/posts/{post}/edit', [AdminPostsController::class, 'edit'])->middleware('can:admin');
+Route::patch('admin/posts/{post}', [AdminPostsController::class, 'update'])->middleware('can:admin');
+Route::delete('admin/posts/{post}', [AdminPostsController::class, 'destroy'])->middleware('can:admin');
+
+
 Route::post('posts/{post}/comments', [PostCommentsController::class, 'store']);
 
 Route::get('register', [RegisterController::class, 'create'])->middleware('guest');

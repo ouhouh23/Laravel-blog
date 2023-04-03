@@ -13,14 +13,12 @@
                 <textarea name="body" class="w-full text-sm focus:outline-none focus:ring" rows="5" placeholder="Start typing here" required></textarea>
             </div>
 
-            @error('body')
-            <span class="text-xs text-red-500">{{ $message }}</span>
-            @enderror
+            <x-form.error name="body" />
 
             <div class="flex justify-end mt-6 pt-6 border-t border-gray-200">
-                <button type="submit" class="bg-blue-500 ml-3 rounded-full text-xs font-semibold text-white uppercase py-3 px-5">
+                <x-form.button>
                     Post
-                </button>
+                </x-form.button>
             </div>
         </form>
     </x-panel>
