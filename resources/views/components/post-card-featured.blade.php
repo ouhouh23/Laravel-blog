@@ -4,7 +4,10 @@
     class="transition-colors duration-300 hover:bg-gray-100 border border-black border-opacity-0 hover:border-opacity-5 rounded-xl">
     <div class="py-6 px-5 lg:flex">
         <div class="flex-1 lg:mr-8">
-            <img src="storage/{{ $post->thumbnail }}" alt="" class="rounded-xl">
+            <img src="{{ $post->thumbnail ? "storage/$post->thumbnail" : 'images/illustration-1.png' }}"
+                 alt=""
+                 class="rounded-xl"
+            />
         </div>
 
         <div class="flex-1 flex flex-col justify-between">
@@ -35,11 +38,12 @@
                         <a href="/?author={{ $post->author->username }}">
                             <h5 class="font-bold">{{ $post->author->name }}</h5>
                         </a>
-                        <h6>Mascot at Laracasts</h6>
+
+                        <h6 class="mt-3">Expert in something</h6>
                     </div>
                 </div>
 
-                <div class="hidden lg:block">
+                <div class="hidden lg:block flex ml-3">
                     <a href="/posts/{{ $post->id }}"
                        class="transition-colors duration-300 text-xs font-semibold bg-gray-200 hover:bg-gray-300 rounded-full py-2 px-8"
                     >Read More</a>

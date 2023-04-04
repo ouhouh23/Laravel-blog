@@ -3,20 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
-use Illuminate\Http\Request;
 
 class AdminPostsController extends Controller
 {
-    public function index() {
+    public function index()
+    {
         return view('admin.posts.index', [
-            'posts' => Post::paginate(50)
+            'posts' => Post::paginate(50),
         ]);
     }
-    public function create() {
+
+    public function create()
+    {
         return view('admin.posts.create');
     }
 
-    public function store() {
+    public function store()
+    {
         $attributes = request()->validate([
             'title' => 'required',
             'thumbnail' => 'image',
@@ -33,13 +36,15 @@ class AdminPostsController extends Controller
         return redirect('/')->with('success', 'Post created!');
     }
 
-    public function edit(Post $post) {
+    public function edit(Post $post)
+    {
         return view('admin.posts.edit', [
-            'post' => $post
+            'post' => $post,
         ]);
     }
 
-    public function update(Post $post) {
+    public function update(Post $post)
+    {
         $attributes = request()->validate([
             'title' => 'required',
             'thumbnail' => 'image',
@@ -48,7 +53,7 @@ class AdminPostsController extends Controller
             'category_id' => 'required|exists:categories,id',
         ]);
 
-        if(isset($attributes['thumbnail'])) {
+        if (isset($attributes['thumbnail'])) {
             $attributes['thumbnail'] = request()->file('thumbnail')->store('thumbnails');
         }
 
@@ -57,7 +62,8 @@ class AdminPostsController extends Controller
         return back()->with('success', 'Post updated!');
     }
 
-    public function destroy(Post $post) {
+    public function destroy(Post $post)
+    {
         $post->delete();
 
         return back()->with('success', 'Post deleted!');

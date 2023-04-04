@@ -25,7 +25,8 @@ class Post extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function comments() {
+    public function comments()
+    {
         return $this->hasMany(Comment::class);
     }
 
@@ -36,19 +37,13 @@ class Post extends Model
 //                ->where('title', 'like', '%'.$filters['search'].'%')
 //                ->orWhere('title', 'like', '%'.$filters['search'].'%');
 //        }
-        $query->when($filters['search'] ?? false, fn($query, $search) =>
-            $query->where(fn($query) =>
-                $query->where('title', 'like', '%'. $search. '%')
-                ->orWhere('title', 'like', '%' . $search . '%')
+        $query->when($filters['search'] ?? false, fn ($query, $search) => $query->where(fn ($query) => $query->where('title', 'like', '%'.$search.'%')
+                ->orWhere('title', 'like', '%'.$search.'%')
             )
         );
 
-        $query->when($filters['category'] ?? false, fn($query, $category) =>
-            $query->whereHas('category', fn($query) =>
-                $query->where('slug', $category)));
+        $query->when($filters['category'] ?? false, fn ($query, $category) => $query->whereHas('category', fn ($query) => $query->where('slug', $category)));
 
-        $query->when($filters['author'] ?? false, fn($query, $author) =>
-            $query->whereHas('author', fn($query) =>
-            $query->where('username', $author)));
+        $query->when($filters['author'] ?? false, fn ($query, $author) => $query->whereHas('author', fn ($query) => $query->where('username', $author)));
     }
 }
