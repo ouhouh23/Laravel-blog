@@ -6,7 +6,7 @@
             <h1 class="text-lg font-bold mb-4"> {{ $heading }} </h1>
 
             <div class="flex">
-                <aside class="w-48">
+                <aside class="w-48 mr-10">
                     <h2 class="font-semibold mb-4">
                         Links
                     </h2>

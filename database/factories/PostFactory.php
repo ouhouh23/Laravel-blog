@@ -22,6 +22,7 @@ class PostFactory extends Factory
             'title' => $this->faker->sentence(),
             'piece' => '<p>'.implode('</p><p>', $this->faker->paragraphs(2)).'</p>',
             'body' => '<p>'.implode('</p><p>', $this->faker->paragraphs(6)).'</p>',
+            'status' => 'published',
             'user_id' => User::factory(),
             'category_id' => Category::factory(),
         ];

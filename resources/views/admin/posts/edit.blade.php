@@ -14,6 +14,12 @@
 
         <x-form.input name="thumbnail" type="file" :value="$post->thumbnail" />
 
+        <x-form.input name="author" :value="$post->author->username" />
+
+        <x-form.radio name="status" value="published" :status="$post->status" />
+
+        <x-form.radio name="status" value="unpublished" :status="$post->status" />
+
         <x-form.button>
             Update
         </x-form.button>

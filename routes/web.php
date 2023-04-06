@@ -9,6 +9,7 @@ use App\Http\Controllers\SessionController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PostsController::class, 'index']);
+
 Route::get('posts/{post}', [PostsController::class, 'show']);
 Route::get('admin/posts/create', [AdminPostsController::class, 'create'])->middleware('can:admin');
 Route::post('admin/posts', [AdminPostsController::class, 'store'])->middleware('can:admin');
@@ -26,3 +27,5 @@ Route::get('login', [SessionController::class, 'create'])->middleware('guest');
 Route::post('sessions', [SessionController::class, 'store'])->middleware('guest');
 
 Route::post('newsletter', NewsletterContoller::class);
+
+Route::feeds();

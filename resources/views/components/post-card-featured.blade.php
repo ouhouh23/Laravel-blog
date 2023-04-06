@@ -22,7 +22,11 @@
                     </h1>
 
                     <span class="mt-2 block text-gray-400 text-xs">
-                                        Published <time>{{ $post->created_at->diffForHumans() }}</time>
+                        Published <time>{{ $post->created_at->diffForHumans() }}</time>
+                    </span>
+
+                    <span class="mt-2 block text-gray-400 text-xs">
+                        Post views: {{ $post->views }}
                     </span>
                 </div>
             </header>
