@@ -45,7 +45,7 @@ class Post extends Model implements Feedable
     }
 
     public static function filtered() {
-        return Post::latest()->where('status', 'published')->filter(request(['search', 'category', 'author']));
+        return self::latest()->where('status', 'published')->filter(request(['search', 'category', 'author']));
     }
 
     public function toFeedItem(): FeedItem

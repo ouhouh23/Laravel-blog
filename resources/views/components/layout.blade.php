@@ -32,6 +32,14 @@
 
                     <button type="submit">Logout</button>
                 </form>
+
+                <a href="/bookmarks" class="font-semibold text-blue-500 ml-6">
+                    Bookmarks
+                </a>
+
+                <a href="/account" class="font-semibold text-blue-500 ml-6">
+                    Account
+                </a>
             @else
                 <a href="/register" class="text-xs font-bold uppercase">Register</a>
                 <a href="/login" class="ml-3 text-xs font-bold uppercase">Log in</a>

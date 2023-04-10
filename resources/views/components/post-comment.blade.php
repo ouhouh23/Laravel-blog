@@ -3,7 +3,9 @@
 <x-panel class="bg-gray-100">
     <article class="flex space-x-4 mb-10" >
         <div class="flex-shrink-0">
-            <img src="https://i.pravatar.cc/60?i={{ $comment->author->id }}" alt="user avatar." width="60" height="60" class="rounded-xl" />
+            <img src="{{ $comment->author->avatar ? "/storage/{$comment->author->avatar}" : "https://i.pravatar.cc/60?i=[$comment->author->id]" }}"
+                 alt="user avatar." width="60" height="60" class="rounded-xl"
+            />
         </div>
 
         <div>

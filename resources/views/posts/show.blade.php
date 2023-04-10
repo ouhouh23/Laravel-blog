@@ -9,15 +9,29 @@
                         Published <time>{{ $post->created_at->diffForHumans() }}</time>
                     </p>
 
-                    <div class="flex items-center lg:justify-center text-sm mt-4">
+                    <div class="flex items-center lg:justify-center text-sm my-4">
                         <img src="/images/lary-avatar.svg" alt="Lary avatar">
                         <div class="ml-3 text-left">
                             <a href="/?author={{ $post->author->username }}">
                                 <h5 class="font-bold">{{ $post->author->name }}</h5>
                             </a>
+
                             <h6>Mascot at Laracasts</h6>
                         </div>
                     </div>
+
+                    @auth
+                    {{ddd($user->favorite_posts_id)}}
+                        @if(!empty($user->favorite_posts_id) && $user->favorite_posts_id->contains($post->id))
+                            <a class="font-semibold text-red-500" href="/posts/{{ $post->id }}/RemoveBookmark">
+                                Remove post from your bookmarks
+                            </a>
+                        @else
+                            <a class="font-semibold text-green-500" href="/posts/{{ $post->id }}/AddBookmark">
+                                Add post to your bookmarks
+                            </a>
+                        @endif
+                    @endauth
                 </div>
 
                 <div class="col-span-8">

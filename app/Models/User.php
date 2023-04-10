@@ -22,6 +22,8 @@ class User extends Authenticatable
         'email',
         'password',
         'username',
+        'favorite_posts_id',
+        'avatar'
     ];
 
     /**
@@ -41,11 +43,18 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'favorite_posts_id' => 'collection'
     ];
 
     public function posts()
     {
         return $this->hasMany(Post::class);
+    }
+
+    public function favorite_posts() {
+        if($this->favorite_posts_id ?? false) {
+            return Post::whereIn('id', $this->favorite_posts_id);
+        }
     }
 
     public function setPasswordAttribute($password)

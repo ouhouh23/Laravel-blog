@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\User;
 
 class PostsController extends Controller
 {
@@ -15,20 +16,21 @@ class PostsController extends Controller
 
     public function show(Post $post)
     {
-        if ($post->status == 'published') {
-            $this->countView($post);
-
-            return view('posts.show', [
-                'post' => $post,
-            ]);
-        }
-        else {
+        if ($post->status !== 'published') {
             abort(403);
         }
+
+        $this->countView($post);
+
+        return view('posts.show', [
+                'post' => $post,
+                'user' => User::find(auth()->id())
+            ]);
     }
 
     public function countView(Post $post) {
         $post->views += 1;
         $post->save();
+        //вынести в сервис
     }
 }

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->text('body');
             $table->text('piece');
             $table->text('status');
+//            $table->enum('status', ['draft', 'unpublished']);
             $table->string('thumbnail')->nullable();
             $table->integer('views')->default(0);
             $table->foreignId('category_id');

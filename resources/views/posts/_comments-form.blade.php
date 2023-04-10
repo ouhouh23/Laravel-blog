@@ -1,7 +1,9 @@
 @auth
     <x-panel>
         <div class="flex items-center">
-            <img src="https://i.pravatar.cc/60?i={{ auth()->id() }}" alt="user avatar." width="40" height="40" class="rounded-full" />
+            <img src="{{ $user->avatar ? "/storage/$user->avatar" : "https://i.pravatar.cc/60?i=$user->id" }}"
+                 alt="user avatar." width="40" height="40" class="rounded-full"
+            />
 
             <h2 class="ml-4">Leave a comment bellow</h2>
         </div>
