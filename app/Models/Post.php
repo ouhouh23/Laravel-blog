@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\Status;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Feed\Feedable;
@@ -25,6 +26,10 @@ class Post extends Model implements Feedable
     public function author()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function SubscribedUsers() {
+        return $this->belongsToMany(User::class, 'bookmarks');
     }
 
     public function comments()
@@ -62,6 +67,6 @@ class Post extends Model implements Feedable
 
     public static function getFeedItems()
     {
-        return Post::oldest()->where('status', 'published')->get();
+        return Post::oldest()->where('status', Status::PUBLISHIED->value)->get();
     }
 }

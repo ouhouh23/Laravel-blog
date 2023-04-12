@@ -20,8 +20,8 @@
 
                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                     status:
-                                    <span class="{{ $post->status == 'published' ? 'text-green-500' : 'text-red-500' }}">
-                                        {{ $post->status }}
+                                    <span class="{{ \App\Enums\Status::tryFrom($post->status)->getStyles() }}">
+                                        {{ \App\Enums\Status::tryFrom($post->status)->value }}
                                     </span>
                                 </td>
 

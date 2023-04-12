@@ -21,15 +21,28 @@
                     </div>
 
                     @auth
-                    {{ddd($user->favorite_posts_id)}}
-                        @if(!empty($user->favorite_posts_id) && $user->favorite_posts_id->contains($post->id))
-                            <a class="font-semibold text-red-500" href="/posts/{{ $post->id }}/RemoveBookmark">
-                                Remove post from your bookmarks
-                            </a>
+                        @if($user->featuredPosts->contains($post))
+                            <form method="POST" action="/posts/{{ $post->id }}/RemoveBookmark">
+                                @csrf
+
+                                <button
+                                    class="bg-red-500 text-white uppercase font-semibold text-xs py-2 px-10 rounded-2xl hover-bg-red-600"
+                                    type="submit"
+                                >
+                                    Remove post from your bookmarks
+                                </button>
+                            </form>
                         @else
-                            <a class="font-semibold text-green-500" href="/posts/{{ $post->id }}/AddBookmark">
-                                Add post to your bookmarks
-                            </a>
+                            <form method="POST" action="/posts/{{ $post->id }}/AddBookmark">
+                                @csrf
+
+                                <button
+                                    class="bg-green-500 text-white uppercase font-semibold text-xs py-2 px-10 rounded-2xl hover-bg-green-600"
+                                    type="submit"
+                                >
+                                    Add post to your bookmarks
+                                </button>
+                            </form>
                         @endif
                     @endauth
                 </div>

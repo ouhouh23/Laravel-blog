@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\Status;
 use App\Models\Category;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -22,7 +23,7 @@ class PostFactory extends Factory
             'title' => $this->faker->sentence(),
             'piece' => '<p>'.implode('</p><p>', $this->faker->paragraphs(2)).'</p>',
             'body' => '<p>'.implode('</p><p>', $this->faker->paragraphs(6)).'</p>',
-            'status' => 'published',
+            'status' => Status::PUBLISHIED->value,
             'user_id' => User::factory(),
             'category_id' => Category::factory(),
         ];

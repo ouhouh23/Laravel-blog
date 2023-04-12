@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminPostsController;
+use App\Http\Controllers\BookmarksController;
 use App\Http\Controllers\NewsletterContoller;
 use App\Http\Controllers\PostCommentsController;
 use App\Http\Controllers\PostsController;
@@ -29,9 +30,10 @@ Route::post('sessions', [SessionController::class, 'store'])->middleware('guest'
 
 Route::post('newsletter', NewsletterContoller::class);
 
-Route::get('posts/{post}/AddBookmark', [UserController::class, 'create'])->middleware('auth');
-Route::get('posts/{post}/RemoveBookmark', [UserController::class, 'delete'])->middleware('auth');
-Route::get('bookmarks', [UserController::class, 'show'])->middleware('auth');
+Route::post('posts/{post}/AddBookmark', [BookmarksController::class, 'create'])->middleware('auth');
+Route::post('posts/{post}/RemoveBookmark', [BookmarksController::class, 'delete'])->middleware('auth');
+Route::get('bookmarks', [BookmarksController::class, 'show'])->middleware('auth');
+
 Route::get('account', [UserController::class, 'edit'])->middleware('auth');
 Route::patch('account/update', [UserController::class, 'update'])->middleware('auth');
 

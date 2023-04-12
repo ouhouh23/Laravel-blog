@@ -10,15 +10,13 @@
 
         <x-form.textarea name="body" :content="$post->piece" />
 
-        <x-form.select name="category_id" :id="$post->category->id" />
+        <x-form.select-category name="category_id" :id="$post->category->id" />
+
+        <x-form.select-author name="user_id" :id="$post->author->id" />
+
+        <x-form.select-status name="status" :value="$post->status" />
 
         <x-form.input name="thumbnail" type="file" :value="$post->thumbnail" />
-
-        <x-form.input name="author" :value="$post->author->username" />
-
-        <x-form.radio name="status" value="published" :status="$post->status" />
-
-        <x-form.radio name="status" value="unpublished" :status="$post->status" />
 
         <x-form.button>
             Update
