@@ -21,6 +21,30 @@
                     </div>
 
                     @auth
+                        @if($user->subscriptions->contains($post->author))
+                            <form class="mb-6" method="POST" action="/posts/{{ $post->id }}/Unsubscribe">
+                                @csrf
+
+                                <button
+                                    class="bg-red-500 text-white uppercase font-semibold text-xs py-2 px-10 rounded-2xl hover-bg-red-600"
+                                    type="submit"
+                                >
+                                    Unsubscribe this author
+                                </button>
+                            </form>
+                        @else
+                            <form class="mb-6" method="POST" action="/posts/{{ $post->id }}/Subscribe">
+                                @csrf
+
+                                <button
+                                    class="bg-green-500 text-white uppercase font-semibold text-xs py-2 px-10 rounded-2xl hover-bg-green-600"
+                                    type="submit"
+                                >
+                                    Subscribe this author
+                                </button>
+                            </form>
+                        @endif
+
                         @if($user->featuredPosts->contains($post))
                             <form method="POST" action="/posts/{{ $post->id }}/RemoveBookmark">
                                 @csrf

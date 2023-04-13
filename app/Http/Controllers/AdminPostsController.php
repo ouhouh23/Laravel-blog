@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Enums\Status;
+use App\Mail\PostCreated;
 use App\Models\Post;
 use App\Models\User;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Rules\Enum;
 
 class AdminPostsController extends Controller
@@ -39,6 +41,11 @@ class AdminPostsController extends Controller
         }
 
         Post::create($attributes);
+
+        $user = User::find(auth() -> id());
+        if($user->followers->count() > 0) {
+            Mail::to($user->followers)->send(new PostCreated($user));
+        }
 
         return redirect('/')->with('success', 'Post created!');
     }

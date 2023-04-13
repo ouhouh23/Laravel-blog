@@ -7,6 +7,7 @@ use App\Http\Controllers\PostCommentsController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionController;
+use App\Http\Controllers\SubscribeController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -36,5 +37,8 @@ Route::get('bookmarks', [BookmarksController::class, 'show'])->middleware('auth'
 
 Route::get('account', [UserController::class, 'edit'])->middleware('auth');
 Route::patch('account/update', [UserController::class, 'update'])->middleware('auth');
+
+Route::post('posts/{post}/Subscribe', [SubscribeController::class, 'create'])->middleware('auth');
+Route::post('posts/{post}/Unsubscribe', [SubscribeController::class, 'delete'])->middleware('auth');
 
 Route::feeds();

@@ -53,7 +53,13 @@ class User extends Authenticatable
         return $this->belongsToMany(Post::class, 'bookmarks');
     }
 
+    public function subscriptions() {
+        return $this->belongsToMany(User::class, 'user_relations', 'user_id', 'author_id');
+    }
 
+    public function followers() {
+        return $this->belongsToMany(User::class, 'user_relations', 'author_id', 'user_id');
+    }
 
     public function setPasswordAttribute($password)
     {

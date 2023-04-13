@@ -8,7 +8,7 @@
 
         <x-form.textarea name="body" />
 
-        <x-form.select name="category_id" />
+        <x-form.select-category name="category_id" />
 
         <x-form.input name="thumbnail" type="file" />
 
